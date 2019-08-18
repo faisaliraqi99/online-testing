@@ -29,3 +29,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
+#task-success {
+  border: 1px solid rgba(80, 244, 61, 0.4);
+}
+#task-unsuccess {
+  border: 1px solid rgba(255,0,0, .4);
+}

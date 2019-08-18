@@ -17,19 +17,23 @@
             "title": "Title of test",
             "type": "input",
             "text": "",
-            "isComplited": false
+            "isComplited": null
           },
           {
-            "title": "Option test",
+            "title": "Option test question",
             "type": "option",
-            "text": "",
-            "isComplited": false
+            "questions": [
+              {"text": "Option 1", "success": false},
+              {"text": "Option 2", "success": true},
+              {"text": "Option 3", "success": false}
+            ],
+            "isComplited": null
           },
           {
             "title": "Title of test",
             "type": "input",
             "text": "",
-            "isComplited": false
+            "isComplited": null
           }
         ]
       },
@@ -42,7 +46,7 @@
             "title": "Title of test",
             "type": "input",
             "text": "",
-            "isComplited": false
+            "isComplited": null
           }
         ]
       },
@@ -55,7 +59,7 @@
             "title": "Title of test",
             "type": "input",
             "text": "",
-            "isComplited": false
+            "isComplited": null
           }
         ]
       },
@@ -68,7 +72,7 @@
             "title": "Title of test",
             "type": "input",
             "text": "",
-            "isComplited": false
+            "isComplited": null
           }
         ]
       },
@@ -81,7 +85,7 @@
             "title": "Title of test",
             "type": "input",
             "text": "",
-            "isComplited": false
+            "isComplited": null
           }
         ]
       }
