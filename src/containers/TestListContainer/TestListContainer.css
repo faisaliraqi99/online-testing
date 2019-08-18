@@ -1,0 +1,23 @@
+.container {
+  display: block;
+  padding-top: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.grid-container {
+  display: grid;
+  padding-top: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.test-item {
+  text-align: center;
+  background-color: rgba(0,0,0, .7);
+  font-size: 1.5rem;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}

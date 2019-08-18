@@ -1,0 +1,90 @@
+{
+  "all": {
+    "users": [
+      {
+        "id": 1,
+        "name": "Faisal",
+        "status": "admin"
+      }
+    ],
+    "tests": [
+      {
+        "id": 1,
+        "owner": 1,
+        "title": "Javascript",
+        "test": [
+          {
+            "title": "Title of test",
+            "type": "input",
+            "text": "",
+            "isComplited": false
+          },
+          {
+            "title": "Option test",
+            "type": "option",
+            "text": "",
+            "isComplited": false
+          },
+          {
+            "title": "Title of test",
+            "type": "input",
+            "text": "",
+            "isComplited": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "owner": 1,
+        "title": "Python",
+        "test": [
+          {
+            "title": "Title of test",
+            "type": "input",
+            "text": "",
+            "isComplited": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "owner": 1,
+        "title": "HTML",
+        "test": [
+          {
+            "title": "Title of test",
+            "type": "input",
+            "text": "",
+            "isComplited": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "owner": 1,
+        "title": "CSS",
+        "test": [
+          {
+            "title": "Title of test",
+            "type": "input",
+            "text": "",
+            "isComplited": false
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "owner": 1,
+        "title": "C#",
+        "test": [
+          {
+            "title": "Title of test",
+            "type": "input",
+            "text": "",
+            "isComplited": false
+          }
+        ]
+      }
+    ]
+  }
+}

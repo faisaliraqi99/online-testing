@@ -1,0 +1,33 @@
+.test-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.test-container h2 {
+  font-size: 32px;
+  margin-right: 1rem;
+}
+.title-btn-test {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.test-container-btn {
+  padding: 10px 20px;
+  background: rgba(0,0,0,0);
+  border: 1px solid rgba(0,0,0, .3);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .3s;
+}
+.test-container-btn:hover {
+  color: #fff;
+  background-color: rgba(161, 3, 3, 0.9)
+}
+.test-container-btn.save:hover {
+  color: #fff;
+  background-color: rgb(14, 116, 48)
+}

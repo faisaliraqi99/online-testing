@@ -1,0 +1,31 @@
+.input-test input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid rgba(0,0,0, .3);
+  outline: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.input-test {
+  width: 45%;
+  margin-bottom: 1rem;
+}
+.input-test:first-child {
+  margin-top: 2rem;
+}
+.input-test h3{
+  margin: 0 0 10px 0;
+}
+.option-test {
+  width: 45%;
+  margin-bottom: 1rem;
+}
+.option-test h3 {
+  margin: 0 0 10px 0;
+}
+.option-test select{
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
