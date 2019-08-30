@@ -9,6 +9,7 @@ import './TestContainer.css'
 class TestContainer extends Component {
   state = {
     inputText: '',
+    newData: null
   }
   componentDidMount() {
     if(this.props.targetTest !== null) {
@@ -16,18 +17,33 @@ class TestContainer extends Component {
       let someData = localStorage.getItem(`test-id-${this.props.targetTest.id}`);
       let jsonNewData = JSON.parse(someData);
 
-      if(jsonNewData !== null) this.props.setTest(jsonNewData)
-      else localStorage.setItem(`test-id-${this.props.targetTest.id}`, JSON.stringify(this.props.targetTest));
+      jsonNewData !== null ? this.props.setTest(jsonNewData) :
+      localStorage.setItem(`test-id-${this.props.targetTest.id}`, JSON.stringify(this.props.targetTest));
 
     }
   }
-  saveTests = (data) => {
-    // let someData = localStorage.getItem(`test-id-${this.props.targetTest.id}`);
+  setTestToState = (data) => {
+    this.setState({...this.state, newData: data})
+  }
+  saveTests = () => {
+    if(this.state.newData !== null) {
+      let checkedTest = this.state.newData.test.map(item => {
+        switch (item.type) {
+          case 'input': if (item.text !== '') item.isComplited = true;
+            break;
+        }
+        return item;
+      });
+      let newState = {...this.state.newData};
+      newState.test = checkedTest;
+
+      this.props.setTest(this.state.newData);
+      localStorage.setItem(`test-id-${this.props.targetTest.id}`, JSON.stringify(this.state.newData));
+    }
   }
   render() {
     const renderTasks = () => {
       if(this.props.targetTest !== null) {
-        let thisData = localStorage.getItem(`test-id-${this.props.targetTest.id}`);
         return (
           <div className="test-container">
             <div className="title-btn-test">
@@ -35,9 +51,9 @@ class TestContainer extends Component {
               <Link to="/"><button className="test-container-btn " onClick={this.props.closeTest}>Close</button></Link>
             </div>
             {this.props.targetTest.test.map((item, index) => (
-              <TestSingleContainer storage={thisData} key={index} data={item} index={index} />
+              <TestSingleContainer setTestToState={this.setTestToState} key={index} index={index} />
             ))}
-            <button className="test-container-btn save" onClick={() => this.saveTests()}>Save</button>
+            <button className="test-container-btn save" onClick={this.saveTests}>Save</button>
           </div>
         )
       } else {

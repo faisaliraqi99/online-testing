@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './TestSingleContainer.css';
 
@@ -7,8 +8,11 @@ class TestSingleContainer extends Component {
     newData: {}
   }
   changeData = (payload, eventType) => {
+
     const index = this.props.index;
-    const item = JSON.parse(this.props.storage);
+    const item = this.props.currentTask;
+    const dataOfTest = this.props.currentTask.test[this.props.index];
+
     if(eventType === 'input') {
       item.test[index].text = payload;
       let newData = item;
@@ -18,7 +22,7 @@ class TestSingleContainer extends Component {
       })
     } else if (eventType === 'change') {
       const optionChoosed = +payload.target.options[payload.target.selectedIndex].value;
-      const completedOrNot = this.props.data.questions[optionChoosed];
+      const completedOrNot = dataOfTest.questions[optionChoosed];
       if (completedOrNot.success === true) {
         item.test[index].isComplited = true;
         let newData = item;
@@ -34,44 +38,48 @@ class TestSingleContainer extends Component {
           ...this.state,
           newData
         })
+
         localStorage.setItem(`test-id-${item.id}`, JSON.stringify(newData));
       }
     }
+    this.props.setTestToState(this.state.newData)
   }
-  render() {
-    const checkType = () => {
+
+  checkType = () => {
+      let dataOfTest = this.props.currentTask.test[this.props.index];
+    
       let status = '';
       let onOff = '';
-      if(this.props.data.type === "input") {
+      if(dataOfTest.type === "input") {
         let placeHold = 'Введите ответ';
-        if(this.props.data.isComplited === true) {
+        if(dataOfTest.isComplited === true) {
           status = 'task-success';
           onOff = 'disabled';
-        } else if(this.props.data.isComplited === false) {
+        } else if(dataOfTest.isComplited === false) {
           status = 'task-unsuccess'
           onOff = 'disabled';
         }
-        if(this.props.data.text.length !== 0) placeHold = this.props.data.text;
+        if(dataOfTest.text.length !== 0) placeHold = dataOfTest.text;
         return (
           <div className="input-test">
-            <h3>{this.props.index + 1}. {this.props.data.title}</h3>
+            <h3>{this.props.index + 1}. {dataOfTest.title}</h3>
             <input onInput={(event) => this.changeData(event.target.value, event.type)} disabled={onOff} id={status} type="text" placeholder={placeHold}></input>
           </div>
         );
       }
-      if(this.props.data.type === "option") {
-        const options = this.props.data.questions;
-        if (this.props.data.isComplited === true) {
+      if(dataOfTest.type === "option") {
+        const options = dataOfTest.questions;
+        if (dataOfTest.isComplited === true) {
           status = 'task-success';
           onOff = 'disabled';
-        } else if (this.props.data.isComplited === false) {
+        } else if (dataOfTest.isComplited === false) {
           status = 'task-unsuccess';
           onOff = 'disabled';
         }
         return (
           <div className="option-test">
-            <h3>{this.props.index + 1}. {this.props.data.title}</h3>
-            <select disabled={onOff} id={status} onChange={(event) => this.changeData(event, event.type)}>
+            <h3>{this.props.index + 1}. {dataOfTest.title}</h3>
+            <select disabled={onOff} id={status} onChange={(event) => this.changeData(event, event.type)}>-
               <option>Choose option</option>
               {options.map((item, index) => (
                 <option key={index} value={index}>{item.text}</option>
@@ -80,9 +88,16 @@ class TestSingleContainer extends Component {
           </div>
         )
       }
-    }
-    return <>{checkType()}</>
+  }
+  render() {
+    return <>{this.checkType()}</>
   }
 }
 
-export default TestSingleContainer;
+const mapStateToProps = state => {
+  return {
+    currentTask: state.data.currentTask
+  }
+}
+
+export default connect(mapStateToProps, null)(TestSingleContainer);
