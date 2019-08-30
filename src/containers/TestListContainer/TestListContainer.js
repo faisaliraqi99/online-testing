@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { setTest } from '../../storage/actions/actions';
 import TestList from '../../components/TestList/TestList';
 
-import TestContainer from '../TestContainer/TestContainer';
 import './TestListContainer.css';
 
 class TestListContainer extends Component {
   render() {
     const testList = () => {
-      if(this.props.info.currentTask === null) {
-        let list = this.props.info.tests.map((item, index) => (
+      let list = this.props.info.tests.map((item, index) => (
+        <Link to="/test" key={index}>
           <TestList
             chooseTest={() => this.props.chooseTest(item)}
             data={item}
             key={index}
           />
-        ));
-        return <div className="grid-container">{list}</div>
-      } else {
-        return (
-        <div className="container">
-          <TestContainer currentTask={this.props.info.currentTask} />
-        </div>
-        )
-      }
+        </Link>
+      ));
+      return <div className="grid-container">{list}</div>
     }
     return testList()
   }

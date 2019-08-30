@@ -26,6 +26,7 @@ class TestSingleContainer extends Component {
           ...this.state,
           newData
         })
+        localStorage.setItem(`test-id-${item.id}`, JSON.stringify(newData));
       } else {
         item.test[index].isComplited = false;
         let newData = item;
@@ -33,11 +34,11 @@ class TestSingleContainer extends Component {
           ...this.state,
           newData
         })
+        localStorage.setItem(`test-id-${item.id}`, JSON.stringify(newData));
       }
     }
   }
   render() {
-    console.log(this.state);
     const checkType = () => {
       let status = '';
       let onOff = '';

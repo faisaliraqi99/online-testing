@@ -4,7 +4,7 @@ import { GET_ALL, SET_TEST, UNSET_TEST } from './actionTypes';
 
 const apiUrl = "http://localhost:3000/all";
 
-export const getData = (data) => {
+export const getData = data => {
   return {
     type: GET_ALL,
     payload: data
@@ -23,7 +23,7 @@ export const getAllData = () => {
   };
 }
 
-export const setTest = (test) => {
+export const setTest = test => {
   return {
     type: SET_TEST,
     payload: test
