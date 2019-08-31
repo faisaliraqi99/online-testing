@@ -11,6 +11,7 @@
       {
         "id": 1,
         "owner": 1,
+        "img": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
         "title": "Javascript",
         "test": [
           {
@@ -41,6 +42,7 @@
         "id": 2,
         "owner": 1,
         "title": "Python",
+        "img": "https://www.stickpng.com/assets/images/5848152fcef1014c0b5e4967.png",
         "test": [
           {
             "title": "Title of test",
@@ -54,6 +56,7 @@
         "id": 3,
         "owner": 1,
         "title": "HTML",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png",
         "test": [
           {
             "title": "Title of test",
@@ -67,6 +70,7 @@
         "id": 4,
         "owner": 1,
         "title": "CSS",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png",
         "test": [
           {
             "title": "Title of test",
@@ -80,6 +84,7 @@
         "id": 5,
         "owner": 1,
         "title": "C#",
+        "img": "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67",
         "test": [
           {
             "title": "Title of test",

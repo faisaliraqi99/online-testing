@@ -5,7 +5,11 @@ import './TestSingleContainer.css';
 
 class TestSingleContainer extends Component {
   state = {
-    newData: {}
+    newData: {},
+    update: true
+  }
+  updateComponent = () => {
+    
   }
   changeData = (payload, eventType) => {
 
@@ -90,6 +94,7 @@ class TestSingleContainer extends Component {
       }
   }
   render() {
+    console.log('SINGLE TEST UPDATED', this.props.currentTask)
     return <>{this.checkType()}</>
   }
 }
