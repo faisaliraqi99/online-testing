@@ -37,3 +37,7 @@
   width: 200px;
   height: 200px;
 }
+
+.test-container-btn.save {
+  margin-bottom: 2rem;
+}

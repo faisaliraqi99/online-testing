@@ -15,25 +15,30 @@
         "title": "Javascript",
         "test": [
           {
-            "title": "Title of test",
+            "title": "Чему равен 'typeof null' в режиме 'use strict'",
             "type": "input",
             "text": "",
             "isComplited": null
           },
           {
-            "title": "Option test question",
+            "title": "Каких операторов из этого списка нет в JS?",
             "type": "option",
             "questions": [
-              {"text": "Option 1", "success": false},
-              {"text": "Option 2", "success": true},
-              {"text": "Option 3", "success": false}
+              {"text": "%", "success": false},
+              {"text": "!", "success": true},
+              {"text": ">>", "success": false}
             ],
             "isComplited": null
           },
           {
-            "title": "Title of test",
-            "type": "input",
-            "text": "",
+            "title": "Переменные apple и Apple одна та же или разные",
+            "type": "option",
+            "questions": [
+              {"text": "Слово <<apple>> является зарезервированным, нельзя использовать", "success": false},
+              {"text": "С большой буквы переменные называть нельзя", "success": false},
+              {"text": "Разные", "success": true},
+              {"text": "Одна и та же", "success": false}
+            ],
             "isComplited": null
           }
         ]

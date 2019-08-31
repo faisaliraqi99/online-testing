@@ -8,9 +8,13 @@ import './TestContainer.css'
 
 class TestContainer extends Component {
 
-  state = {
-    inputText: '',
-    newData: null
+  constructor(props) {
+    super(props)
+    this.state = {
+      inputText: '',
+      newData: null
+    };
+    // this.TestSingleContainer = React.createRef();
   }
 
   componentDidMount() {
@@ -27,9 +31,9 @@ class TestContainer extends Component {
   setTestToState = (data) => {
     this.setState({...this.state, newData: data})
   }
-  handleSave = () => {
-      this.superheroElement.current.updateComponent();
-  }
+  // handleUpdate = () => {
+  //   console.log(this.TestSingleContainer.current)
+  // }
   saveTests = () => {
     if(this.state.newData !== null) {
       let checkedTest = this.state.newData.test.map(item => {
@@ -47,6 +51,7 @@ class TestContainer extends Component {
       this.setTestToState(this.state.newData);
       localStorage.setItem(`test-id-${this.props.targetTest.id}`, JSON.stringify(this.state.newData));
     }
+    this.handleUpdate();
   }
   renderTasks = () => {
     if(this.props.targetTest !== null) {
@@ -58,7 +63,7 @@ class TestContainer extends Component {
               <Link to="/"><button className="test-container-btn " onClick={this.props.closeTest}>Close</button></Link>
             </div>
             {this.props.targetTest.test.map((item, index) => (
-              <TestSingleContainer setTestToState={this.setTestToState} key={index} index={index} />
+              <TestSingleContainer ref={this.superheroElement} setTestToState={this.setTestToState} key={index} index={index} />
             ))}
             <button className="test-container-btn save" onClick={() => this.saveTests()}>Save</button>
           </div>
@@ -70,14 +75,13 @@ class TestContainer extends Component {
   }
 
   render() {
-    console.log('CONTAINER UPDATED');
+    console.log('TestContainer updated')
     return this.renderTasks();
   }
 
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     targetTest: state.data.currentTask
   }

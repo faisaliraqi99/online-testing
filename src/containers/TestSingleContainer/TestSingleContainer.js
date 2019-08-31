@@ -8,8 +8,8 @@ class TestSingleContainer extends Component {
     newData: {},
     update: true
   }
-  updateComponent = () => {
-    
+  updateState = () => {
+    this.setState({...this.state, update: !this.state.update})
   }
   changeData = (payload, eventType) => {
 
@@ -51,7 +51,7 @@ class TestSingleContainer extends Component {
 
   checkType = () => {
       let dataOfTest = this.props.currentTask.test[this.props.index];
-    
+
       let status = '';
       let onOff = '';
       if(dataOfTest.type === "input") {
@@ -94,7 +94,7 @@ class TestSingleContainer extends Component {
       }
   }
   render() {
-    console.log('SINGLE TEST UPDATED', this.props.currentTask)
+    console.log('TestSingleContainer UPDATED')
     return <>{this.checkType()}</>
   }
 }
@@ -105,4 +105,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(TestSingleContainer);
+export default connect(mapStateToProps)(TestSingleContainer);
