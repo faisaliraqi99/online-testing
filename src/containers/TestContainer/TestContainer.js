@@ -7,16 +7,10 @@ import TestSingleContainer from '../TestSingleContainer/TestSingleContainer';
 import './TestContainer.css'
 
 class TestContainer extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      inputText: '',
-      newData: null
-    };
-    // this.TestSingleContainer = React.createRef();
+  state = {
+    inputText: '',
+    newData: null
   }
-
   componentDidMount() {
     if(this.props.targetTest !== null) {
 
@@ -31,9 +25,9 @@ class TestContainer extends Component {
   setTestToState = (data) => {
     this.setState({...this.state, newData: data})
   }
-  // handleUpdate = () => {
-  //   console.log(this.TestSingleContainer.current)
-  // }
+  handleUpdate = () => {
+    console.log(this.TestSingleContainer.current)
+  }
   saveTests = () => {
     if(this.state.newData !== null) {
       let checkedTest = this.state.newData.test.map(item => {
