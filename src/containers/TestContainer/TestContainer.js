@@ -7,9 +7,13 @@ import TestSingleContainer from '../TestSingleContainer/TestSingleContainer';
 import './TestContainer.css'
 
 class TestContainer extends Component {
-  state = {
-    inputText: '',
-    newData: null
+  constructor(props) {
+    super(props)
+    this.TestSingleContainerElement = React.createRef();
+    this.state = {
+      inputText: '',
+      newData: null
+    }
   }
   componentDidMount() {
     if(this.props.targetTest !== null) {
@@ -24,9 +28,6 @@ class TestContainer extends Component {
   }
   setTestToState = (data) => {
     this.setState({...this.state, newData: data})
-  }
-  handleUpdate = () => {
-    console.log(this.TestSingleContainer.current)
   }
   saveTests = () => {
     if(this.state.newData !== null) {
@@ -47,17 +48,22 @@ class TestContainer extends Component {
     }
     this.handleUpdate();
   }
-  renderTasks = () => {
-    if(this.props.targetTest !== null) {
+  handleUpdate = () => {
+    console.log(this.TestSingleContainerElement)
+  }
+
+  render() {
+    const renderTasks = () => {
+      if (this.props.targetTest !== null) {
         return (
           <div className="test-container">
-            <div className="title-img" style={{ background: `url(${this.props.targetTest.img})  center center / contain no-repeat`}}></div>
+            <div className="title-img" style={{ background: `url(${this.props.targetTest.img})  center center / contain no-repeat` }}></div>
             <div className="title-btn-test">
               <h2>{this.props.targetTest.title}</h2>
               <Link to="/"><button className="test-container-btn " onClick={this.props.closeTest}>Close</button></Link>
             </div>
             {this.props.targetTest.test.map((item, index) => (
-              <TestSingleContainer ref={this.superheroElement} setTestToState={this.setTestToState} key={index} index={index} />
+              <TestSingleContainer ref={(this.TestSingleContainerElement)} setTestToState={this.setTestToState} key={index} index={index} />
             ))}
             <button className="test-container-btn save" onClick={() => this.saveTests()}>Save</button>
           </div>
@@ -66,11 +72,8 @@ class TestContainer extends Component {
         this.props.history.push('/');
         return <h1>Select the test</h1>
       }
-  }
-
-  render() {
-    console.log('TestContainer updated')
-    return this.renderTasks();
+    }
+    return renderTasks();
   }
 
 }
@@ -88,4 +91,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestContainer);
+export default connect(mapStateToProps, mapDispatchToProps, null)(TestContainer);

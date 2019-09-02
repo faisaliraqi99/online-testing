@@ -50,47 +50,49 @@ class TestSingleContainer extends Component {
   }
 
   checkType = () => {
-      let dataOfTest = this.props.currentTask.test[this.props.index];
 
+      let dataOfTest = this.props.currentTask.test[this.props.index];
       let status = '';
       let onOff = '';
-      if(dataOfTest.type === "input") {
-        let placeHold = 'Введите ответ';
-        if(dataOfTest.isComplited === true) {
-          status = 'task-success';
-          onOff = 'disabled';
-        } else if(dataOfTest.isComplited === false) {
-          status = 'task-unsuccess'
-          onOff = 'disabled';
-        }
-        if(dataOfTest.text.length !== 0) placeHold = dataOfTest.text;
-        return (
-          <div className="input-test">
-            <h3>{this.props.index + 1}. {dataOfTest.title}</h3>
-            <input onInput={(event) => this.changeData(event.target.value, event.type)} disabled={onOff} id={status} type="text" placeholder={placeHold}></input>
-          </div>
-        );
-      }
-      if(dataOfTest.type === "option") {
-        const options = dataOfTest.questions;
-        if (dataOfTest.isComplited === true) {
-          status = 'task-success';
-          onOff = 'disabled';
-        } else if (dataOfTest.isComplited === false) {
-          status = 'task-unsuccess';
-          onOff = 'disabled';
-        }
-        return (
-          <div className="option-test">
-            <h3>{this.props.index + 1}. {dataOfTest.title}</h3>
-            <select disabled={onOff} id={status} onChange={(event) => this.changeData(event, event.type)}>-
+
+      switch(dataOfTest.type){
+        case 'input': 
+          let placeHold = 'Введите ответ';
+          if (dataOfTest.isComplited === true) {
+            status = 'task-success';
+            onOff = 'disabled';
+          } else if (dataOfTest.isComplited === false) {
+            status = 'task-unsuccess'
+            onOff = 'disabled';
+          }
+          if (dataOfTest.text.length !== 0) placeHold = dataOfTest.text;
+          return (
+            <div className="input-test">
+              <h3>{this.props.index + 1}. {dataOfTest.title}</h3>
+              <input onInput={(event) => this.changeData(event.target.value, event.type)} disabled={onOff} id={status} type="text" placeholder={placeHold}></input>
+            </div>
+          );
+        case 'option': 
+          const options = dataOfTest.questions;
+          if (dataOfTest.isComplited === true) {
+            status = 'task-success';
+            onOff = 'disabled';
+          } else if (dataOfTest.isComplited === false) {
+            status = 'task-unsuccess';
+            onOff = 'disabled';
+          }
+          return (
+            <div className="option-test">
+              <h3>{this.props.index + 1}. {dataOfTest.title}</h3>
+              <select disabled={onOff} id={status} onChange={(event) => this.changeData(event, event.type)}>-
               <option>Choose option</option>
-              {options.map((item, index) => (
-                <option key={index} value={index}>{item.text}</option>
-              ))}
-            </select>
-          </div>
-        )
+                {options.map((item, index) => (
+                  <option key={index} value={index}>{item.text}</option>
+                ))}
+              </select>
+            </div>
+          );
+        default: ;
       }
   }
   render() {
