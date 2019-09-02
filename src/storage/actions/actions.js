@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_ALL, SET_TEST, UNSET_TEST } from './actionTypes';
+import { GET_ALL, SET_TEST, UNSET_TEST, SET_COMPLITED } from './actionTypes';
 
 const apiUrl = "http://localhost:3000/all";
 
@@ -12,7 +12,7 @@ export const getData = data => {
 }
 
 export const getAllData = () => {
-  return (dispatch) => {
+  return dispatch => {
     return axios.get(apiUrl)
       .then(response => {
         dispatch(getData(response.data));
@@ -33,5 +33,13 @@ export const setTest = test => {
 export const unsetTest = () => {
   return {
     type: UNSET_TEST
+  }
+}
+
+export const setComplited = (state, index, payload) => {
+
+  return {
+    type: SET_COMPLITED,
+    payload
   }
 }
