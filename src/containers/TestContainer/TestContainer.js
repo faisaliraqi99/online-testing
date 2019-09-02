@@ -7,26 +7,23 @@ import TestSingleContainer from '../TestSingleContainer/TestSingleContainer';
 import './TestContainer.css'
 
 class TestContainer extends Component {
+
   state = {
     inputText: '',
     newData: null
   }
+
   componentDidMount() {
-    if(this.props.targetTest !== null) {
+    if(this.props.currentTask !== null) {
 
-      let someData = localStorage.getItem(`test-id-${this.props.targetTest.id}`);
-      let jsonNewData = JSON.parse(someData);
+      let dataFromLocalStorage = JSON.parse(localStorage.getItem(`test-id-${this.props.currentTask.id}`));
 
-      jsonNewData !== null ? this.props.setTest(jsonNewData) :
-      localStorage.setItem(`test-id-${this.props.targetTest.id}`, JSON.stringify(this.props.targetTest));
-
+      dataFromLocalStorage !== null ? this.props.setTest(dataFromLocalStorage) :
+      localStorage.setItem(`test-id-${this.props.currentTask.id}`, JSON.stringify(this.props.currentTask));
     }
   }
   setTestToState = (data) => {
     this.setState({...this.state, newData: data})
-  }
-  handleUpdate = () => {
-    console.log(this.TestSingleContainer.current)
   }
   saveTests = () => {
     if(this.state.newData !== null) {
@@ -43,21 +40,22 @@ class TestContainer extends Component {
 
       this.props.setTest(this.state.newData);
       this.setTestToState(this.state.newData);
-      localStorage.setItem(`test-id-${this.props.targetTest.id}`, JSON.stringify(this.state.newData));
+      localStorage.setItem(`test-id-${this.props.currentTask.id}`, JSON.stringify(this.state.newData));
     }
-    this.handleUpdate();
   }
-  renderTasks = () => {
-    if(this.props.targetTest !== null) {
+
+  render() {
+    const renderTasks = () => {
+      if (this.props.currentTask !== null) {
         return (
           <div className="test-container">
-            <div className="title-img" style={{ background: `url(${this.props.targetTest.img})  center center / contain no-repeat`}}></div>
+            <div className="title-img" style={{ background: `url(${this.props.currentTask.img})  center center / contain no-repeat` }}></div>
             <div className="title-btn-test">
-              <h2>{this.props.targetTest.title}</h2>
+              <h2>{this.props.currentTask.title}</h2>
               <Link to="/"><button className="test-container-btn " onClick={this.props.closeTest}>Close</button></Link>
             </div>
-            {this.props.targetTest.test.map((item, index) => (
-              <TestSingleContainer ref={this.superheroElement} setTestToState={this.setTestToState} key={index} index={index} />
+            {this.props.currentTask.test.map((item, index) => (
+              <TestSingleContainer setTestToState={this.setTestToState} key={index} index={index} />
             ))}
             <button className="test-container-btn save" onClick={() => this.saveTests()}>Save</button>
           </div>
@@ -66,18 +64,15 @@ class TestContainer extends Component {
         this.props.history.push('/');
         return <h1>Select the test</h1>
       }
-  }
-
-  render() {
-    console.log('TestContainer updated')
-    return this.renderTasks();
+    }
+    return renderTasks();
   }
 
 }
 
 const mapStateToProps = state => {
   return {
-    targetTest: state.data.currentTask
+    currentTask: state.data.currentTask
   }
 }
 
@@ -88,4 +83,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestContainer);
+export default connect(mapStateToProps, mapDispatchToProps, null)(TestContainer);
