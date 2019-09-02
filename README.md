@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### FIRST!!! open folder with project in bash,
+### 2. npm install
+### 3. install json-server
+### 4. In $project_folder(master): json-server --watch ./db.json
+### 5. npm start
+### 6. port 3000 already exist did you want run app on another port? y enter
+### 7. w8
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
