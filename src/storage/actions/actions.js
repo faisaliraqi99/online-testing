@@ -36,10 +36,22 @@ export const unsetTest = () => {
   }
 }
 
-export const setComplited = (state, index, payload) => {
-
+export const setComplited = (obj) => {
+  const data = obj.data;
+  const eventTarget = obj.event.target;
+  const testType = obj.event.target.name;
+  console.log(data);
+  console.log(testType);
+  switch(testType) {
+    case 'option-test':
+      let selectedOption = eventTarget.options[eventTarget.selectedIndex].value;
+    break;
+    default:
+      console.log('OTHER EVENT')
+    break;
+  }
   return {
     type: SET_COMPLITED,
-    payload
+    payload: obj.data
   }
 }
