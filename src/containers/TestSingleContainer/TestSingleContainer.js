@@ -14,6 +14,10 @@ class TestSingleContainer extends Component {
     this.setState({...this.state, update: !this.state.update})
   }
 
+  saveData = (obj)=>{
+    console.log(obj, this.props.index, this.props.currentTask.test[this.props.index])
+  }
+
   checkType = () => {
 
       let dataOfTest = this.props.currentTask.test[this.props.index];
@@ -25,7 +29,7 @@ class TestSingleContainer extends Component {
         return (
           <InputTest data={{
             index: this.props.index,
-            changeData: (obj) => this.saveData(obj),
+            changeData: this.saveData,
             testData: dataOfTest
           }}/>
         );

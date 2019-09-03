@@ -2,6 +2,7 @@ import React from 'react'
 
 const InputTest = (props) => {
 
+  console.log(props.data);
   const data = props.data.testData;
   const changeData = () => props.data.changeData();
   const index = props.data.index;

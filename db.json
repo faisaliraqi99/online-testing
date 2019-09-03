@@ -28,7 +28,7 @@
               {"text": "!", "success": true},
               {"text": ">>", "success": false}
             ],
-            "isComplited": 
+            "isComplited": null
           },
           {
             "title": "Переменные apple и Apple одна та же или разные",
