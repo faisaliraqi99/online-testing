@@ -3,9 +3,9 @@ import React from 'react'
 const InputTest = (props) => {
 
   const data = props.data.testData;
-  const changeData = () => props.data.changeData();
   const index = props.data.index;
   const options = data.questions;
+  const setComplitedAndSave = (obj) => props.data.setComplitedAndSave(obj);
 
   let onOff = '';
   let status = '';
@@ -18,10 +18,14 @@ const InputTest = (props) => {
     onOff = 'disabled';
   }
 
+  const changeHandler = (event) => {
+    setComplitedAndSave({data, event, index});
+  }
+
   return (
     <div className="option-test">
       <h3>{index + 1}. {data.title}</h3>
-      <select disabled={onOff} id={status} onChange={(event) => changeData(event, event.type)}>-
+      <select disabled={onOff} id={status} name="option-test" onChange={changeHandler}>-
         <option>Choose option</option>
         {options.map((item, index) => (
           <option key={index} value={index}>{item.text}</option>

@@ -5,14 +5,9 @@ import InputTest from '../../components/TestTypes/InputTest';
 import OptionTest from '../../components/TestTypes/OptionTest';
 import './TestSingleContainer.css';
 
+import { setComplited } from '../../storage/actions/actions';
+
 class TestSingleContainer extends Component {
-  state = {
-    newData: {},
-    update: true
-  }
-  updateState = () => {
-    this.setState({...this.state, update: !this.state.update})
-  }
 
   saveData = (obj)=>{
     console.log(obj, this.props.index, this.props.currentTask.test[this.props.index])
@@ -21,8 +16,6 @@ class TestSingleContainer extends Component {
   checkType = () => {
 
       let dataOfTest = this.props.currentTask.test[this.props.index];
-      let status = '';
-      let onOff = '';
 
       switch(dataOfTest.type){
         case 'input': 
@@ -36,7 +29,7 @@ class TestSingleContainer extends Component {
         case 'option': return (
           <OptionTest data={{
             index: this.props.index,
-            changeData: (obj) => this.saveData(obj),
+            setComplitedAndSave: this.props.setComplitedAndSave,
             testData: dataOfTest
           }} />
         );
@@ -44,7 +37,6 @@ class TestSingleContainer extends Component {
       }
   }
   render() {
-    console.log('TestSingleContainer UPDATED')
     return this.checkType();
   }
 }
@@ -55,4 +47,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(TestSingleContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    setComplitedAndSave: (obj) => dispatch(setComplited(obj))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestSingleContainer);
