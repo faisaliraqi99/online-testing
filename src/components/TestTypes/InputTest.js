@@ -2,9 +2,9 @@ import React from 'react'
 
 const InputTest = (props) => {
 
-  const data = props.data.testData;
-  const changeData = () => props.data.changeData();
-  const index = props.data.index;
+  const { currentTask, index, setComplitedAndSave } = props;
+
+  const data = currentTask.test[index];
 
   let onOff = '';
   let status = '';
@@ -17,11 +17,16 @@ const InputTest = (props) => {
     status = 'task-unsuccess'
     onOff = 'disabled';
   }
+
   if(data.text.length !== 0) response = data.text;
+
+  const inputHandler = event => {
+    setComplitedAndSave(currentTask, event, index)
+  }
   return (
     <div className="input-test">
       <h3>{index + 1}. {data.title}</h3>
-      <input onInput={(event) => changeData(event.target.value, event.type)} disabled={onOff} id={status} type="text" responseer={response}></input>
+      <input name="input-test" onInput={inputHandler} disabled={onOff} id={status} type="text" placeholder={response}></input>
     </div>
   );
 }

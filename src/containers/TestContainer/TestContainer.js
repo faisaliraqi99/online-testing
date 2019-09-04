@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { unsetTest, setTest } from '../../storage/actions/actions';
+import { unsetTest, setTest, saveCurrentTask } from '../../storage/actions/actions';
 import TestSingleContainer from '../TestSingleContainer/TestSingleContainer';
 import './TestContainer.css'
 
@@ -17,23 +17,10 @@ class TestContainer extends Component {
       localStorage.setItem(`test-id-${this.props.currentTask.id}`, JSON.stringify(this.props.currentTask));
     }
   }
-  saveTests = () => {
-    // if(this.state.newData !== null) {
-    //   let checkedTest = this.state.newData.test.map(item => {
-    //     switch (item.type) {
-    //       case 'input': if (item.text !== '') item.isComplited = true;
-    //         break;
-    //       default: console.log('TEST CONTAINER ERROR', item);
-    //     }
-    //     return item;
-    //   });
-    //   let newState = {...this.state.newData};
-    //   newState.test = checkedTest;
 
-      // this.props.setTest(this.state.newData); update test
-      
-      // localStorage.setItem(`test-id-${this.props.currentTask.id}`, JSON.stringify(this.state.newData));
-    // }
+  saveHandler = () => {
+    this.props.saveCurrentTask()
+    localStorage.setItem(`test-id-${this.props.currentTask.id}`, JSON.stringify(this.props.currentTaskEdited));
   }
 
   render() {
@@ -49,7 +36,7 @@ class TestContainer extends Component {
             {this.props.currentTask.test.map((item, index) => (
               <TestSingleContainer key={index} index={index} />
             ))}
-            <button className="test-container-btn save" onClick={() => this.saveTests()}>Save</button>
+            <button className="test-container-btn save" onClick={this.saveHandler}>Save</button>
           </div>
         )
       } else {
@@ -64,15 +51,17 @@ class TestContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentTask: state.data.currentTask
+    currentTask: state.data.currentTask,
+    currentTaskEdited: state.data.currentTaskEdited
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     closeTest: () => dispatch(unsetTest()),
-    setTest: (data) => dispatch(setTest(data))
+    setTest: (data) => dispatch(setTest(data)),
+    saveCurrentTask: () => dispatch(saveCurrentTask())
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, null)(TestContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TestContainer);

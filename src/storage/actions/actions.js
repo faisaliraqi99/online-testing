@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_ALL, SET_TEST, UNSET_TEST, SET_COMPLITED } from './actionTypes';
+import { GET_ALL, SET_TEST, UNSET_TEST, SET_COMPLITED, SAVE_CURRENT_TASK } from './actionTypes';
 
 const apiUrl = "http://localhost:3000/all";
 
@@ -36,22 +36,40 @@ export const unsetTest = () => {
   }
 }
 
-export const setComplited = (obj) => {
-  const data = obj.data;
-  const eventTarget = obj.event.target;
-  const testType = obj.event.target.name;
-  console.log(data);
-  console.log(testType);
-  switch(testType) {
+export const setComplited = (currentTask, event, index) => {
+
+  const singleTestData = currentTask.test[index];
+  const eventTarget = event.target;
+
+  switch(eventTarget.name) {
     case 'option-test':
-      let selectedOption = eventTarget.options[eventTarget.selectedIndex].value;
+
+      let selectedOption = +eventTarget.options[eventTarget.selectedIndex].value;
+
+      singleTestData.questions.forEach((item, optionIndex) => {
+        if (optionIndex === selectedOption) {
+          if (item.success === true) currentTask.test[index].isComplited = true;
+          else if(item.success === false) currentTask.test[index].isComplited = false;
+        }
+      });
+
     break;
-    default:
-      console.log('OTHER EVENT')
+    case 'input-test':
+      currentTask.test[index].text = eventTarget.value;
+      if(currentTask.test[index].text !== '') currentTask.test[index].isComplited = true;
+      else currentTask.test[index].isComplited = false;
     break;
+    default: console.log('OTHER EVENT');
   }
+
   return {
     type: SET_COMPLITED,
-    payload: obj.data
+    payload: currentTask
+  }
+}
+
+export const saveCurrentTask = data => {
+  return {
+    type: SAVE_CURRENT_TASK
   }
 }

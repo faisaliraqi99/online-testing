@@ -1,30 +1,29 @@
 import React from 'react'
 
-const InputTest = (props) => {
+const OptionTest = (props) => {
 
-  const data = props.data.testData;
-  const index = props.data.index;
-  const options = data.questions;
-  const setComplitedAndSave = (obj) => props.data.setComplitedAndSave(obj);
+  const { currentTask, index, setComplitedAndSave } = props;
+  const thisTestData = currentTask.test[index];
+  const options = thisTestData.questions;
 
   let onOff = '';
   let status = '';
 
-  if (data.isComplited === true) {
+  if (thisTestData.isComplited === true) {
     status = 'task-success';
     onOff = 'disabled';
-  } else if (data.isComplited === false) {
+  } else if (thisTestData.isComplited === false) {
     status = 'task-unsuccess'
     onOff = 'disabled';
   }
 
   const changeHandler = (event) => {
-    setComplitedAndSave({data, event, index});
+    setComplitedAndSave(currentTask, event, index);
   }
 
   return (
     <div className="option-test">
-      <h3>{index + 1}. {data.title}</h3>
+      <h3>{index + 1}. {thisTestData.title}</h3>
       <select disabled={onOff} id={status} name="option-test" onChange={changeHandler}>-
         <option>Choose option</option>
         {options.map((item, index) => (
@@ -35,4 +34,4 @@ const InputTest = (props) => {
   );
 }
 
-export default InputTest;
+export default OptionTest;

@@ -11,23 +11,24 @@ class TestSingleContainer extends Component {
 
   checkType = () => {
 
-      let dataOfTest = this.props.currentTask.test[this.props.index];
+      let currentTask = {...this.props.currentTask};
 
-      switch(dataOfTest.type){
-        case 'input': 
+      switch(currentTask.test[this.props.index].type){
+        case 'input':
         return (
-          <InputTest data={{
-            index: this.props.index,
-            changeData: (obj) => this.saveData(obj),
-            testData: dataOfTest
-          }}/>
+          <InputTest
+            index={this.props.index}
+            setComplitedAndSave={this.props.setComplitedAndSave}
+            currentTask={currentTask}
+          />
         );
-        case 'option': return (
-          <OptionTest data={{
-            index: this.props.index,
-            setComplitedAndSave: this.props.setComplitedAndSave,
-            testData: dataOfTest
-          }} />
+        case 'option':
+        return (
+          <OptionTest
+            index={this.props.index}
+            setComplitedAndSave={this.props.setComplitedAndSave}
+            currentTask={currentTask}
+          />
         );
         default: ;
       }
@@ -45,7 +46,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setComplitedAndSave: (obj) => dispatch(setComplited(obj))
+    setComplitedAndSave: (data,event,index) => dispatch(setComplited(data,event,index))
   }
 }
 
