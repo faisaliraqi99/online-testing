@@ -33,7 +33,7 @@ class TestContainer extends Component {
       // this.props.setTest(this.state.newData); update test
       
       // localStorage.setItem(`test-id-${this.props.currentTask.id}`, JSON.stringify(this.state.newData));
-    }
+    // }
   }
 
   render() {
@@ -47,7 +47,7 @@ class TestContainer extends Component {
               <Link to="/"><button className="test-container-btn " onClick={this.props.closeTest}>Close</button></Link>
             </div>
             {this.props.currentTask.test.map((item, index) => (
-              <TestSingleContainer key={index} index={index} />
+              <TestSingleContainer key={index} index={+index} />
             ))}
             <button className="test-container-btn save" onClick={() => this.saveTests()}>Save</button>
           </div>

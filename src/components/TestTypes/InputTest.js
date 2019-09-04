@@ -2,26 +2,26 @@ import React from 'react'
 
 const InputTest = (props) => {
 
-  console.log(props.data);
-  const data = props.data.testData;
-  const changeData = () => props.data.changeData();
   const index = props.data.index;
+  const data = props.data.currentTestData;
+  const dataOfSingleTest = data.test[index];
+  const changeData = () => props.data.changeData();
 
   let onOff = '';
   let status = '';
   let response = 'Введите ответ';
 
-  if (data.isComplited === true) {
+  if (dataOfSingleTest.isComplited === true) {
     status = 'task-success';
     onOff = 'disabled';
-  } else if (data.isComplited === false) {
+  } else if (dataOfSingleTest.isComplited === false) {
     status = 'task-unsuccess'
     onOff = 'disabled';
   }
-  if(data.text.length !== 0) response = data.text;
+  if(dataOfSingleTest.text.length !== 0) response = dataOfSingleTest.text;
   return (
     <div className="input-test">
-      <h3>{index + 1}. {data.title}</h3>
+      <h3>{index + 1}. {dataOfSingleTest.title}</h3>
       <input onInput={(event) => changeData(event.target.value, event.type)} disabled={onOff} id={status} type="text" responseer={response}></input>
     </div>
   );

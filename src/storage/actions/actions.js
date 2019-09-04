@@ -37,14 +37,37 @@ export const unsetTest = () => {
 }
 
 export const setComplited = (obj) => {
+  const indexOfSingleTest = obj.index;
   const data = obj.data;
+  const dataOfSingleTest = data.test[indexOfSingleTest];
   const eventTarget = obj.event.target;
-  const testType = obj.event.target.name;
-  console.log(data);
-  console.log(testType);
+  const testType = eventTarget.name;
+
   switch(testType) {
     case 'option-test':
-      let selectedOption = eventTarget.options[eventTarget.selectedIndex].value;
+      let selectedOption = +eventTarget.options[eventTarget.selectedIndex].value;
+      dataOfSingleTest.questions.forEach((item, index) => {
+        if(selectedOption === index) {
+          if(item.success === true) {
+            let newData = data;
+            newData.test[indexOfSingleTest].isComplited = true;
+
+            return {
+              type: SET_COMPLITED,
+              payload: newData
+            }
+          } else {
+            let newData = data;
+            newData.test[indexOfSingleTest].isComplited = false;
+
+            return {
+              type: SET_COMPLITED,
+              payload: newData
+            }
+          }
+        }
+      })
+      console.log(selectedOption)
     break;
     default:
       console.log('OTHER EVENT')

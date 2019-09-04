@@ -10,32 +10,33 @@ import { setComplited } from '../../storage/actions/actions';
 class TestSingleContainer extends Component {
 
   saveData = (obj)=>{
-    console.log(obj, this.props.index, this.props.currentTask.test[this.props.index])
+    // console.log(obj, this.props.index, this.props.currentTask.test[this.props.index])
   }
 
   checkType = () => {
 
-      let dataOfTest = this.props.currentTask.test[this.props.index];
+      let currentTestData = this.props.currentTask;
 
-      switch(dataOfTest.type){
+      switch(currentTestData.test[+this.props.index].type){
         case 'input': 
         return (
           <InputTest data={{
             index: this.props.index,
             changeData: this.saveData,
-            testData: dataOfTest
+            currentTestData: currentTestData
           }}/>
         );
         case 'option': return (
           <OptionTest data={{
             index: this.props.index,
             setComplitedAndSave: this.props.setComplitedAndSave,
-            testData: dataOfTest
+            currentTestData: currentTestData
           }} />
         );
         default: ;
       }
   }
+
   render() {
     return this.checkType();
   }
